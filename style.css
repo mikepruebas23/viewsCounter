@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@500&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(29, 28, 29);
+}
+.container{
+    width: 25%;
+    margin: 25px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-radius: 3px;
+
+}
+
+#cont-img {
+    width: 100%;
+    text-align: center;
+}
+
+#cont-img > img {
+    width: 100%;
+}
+#info {
+    padding: 3px;
+    /* background: #efefef; */
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.date,#lafecha{
+    color: gray;
+    font-size: 14px;
+    text-align: start;
+}
+
+#viewContainer {
+    margin-top: 25px;
+    text-align: center;
+}
+#viewCount {
+    font-size: 5em;
+}
+
+#likeCount {
+    font-size: 3em;
+}
+i {
+    color: #e77575;
+    font-size: 25px;
+}
+
+#instagram {
+    margin-top: 10px;
+    background: #efefef;
+    padding: 5px;
+    border-radius: 3px;
+}
+a {
+    text-decoration: none;
+    color: gray;
+}
+
+#nota {
+    margin-top: 5px;
+    color: gray;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+}
+
+@media (max-width: 479px) and (min-width: 320px) {
+    .container{
+        margin: 0 auto;
+        width: 90%;
+        padding: 5px;
+        margin-top: 45px;
+    }
+
+    #viewCount {
+        font-size: 3em;
+    }
+    
+    #likeCount {
+        font-size: 2em;
+    }
+}

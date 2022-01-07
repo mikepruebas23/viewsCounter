@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mucho Para mi Contador</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+    <div class="container">
+        <div id="cont-img">
+            <img src="./muchoparami.jfif" alt="Mucho Para mi">
+            <div id="info">
+                <div id="dates">
+                    <div class="date">
+                        Fecha de estreno: 23 dic 2021
+                    </div>
+                    <div id="lafecha"></div>
+                </div>
+                <div>
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+        </div>
+
+        <div id="viewContainer">
+            <span id="contViews">VISTAS</span>
+            <div id="viewCount"></div>
+        </div>
+    
+        <p id="contLikes">LIKES</p>
+        <div id="likeCount"></div>
+
+        <div id="instagram">
+            <a href="https://www.instagram.com/elmikerm" target="_blank">Sigueme en Instagram | elmikerm</a>
+        </div>
+        <span id="nota">NOTA: cada 5 Minutos se actualiza debido a que consumo la api de Youtube y no obtengo los datos en tiempo real.</span>
+    </div>
+
+    <script>
+        
+    const APIKey = 'AIzaSyBmvZcPG1mmrdE8AOAdhF_0Kd0h9yQnLX4';
+    const Userid = 'ymJ1svwvpLQ';
+    const subscriberCount= document.getElementById('subscriberCount');
+    const viewCount = document.getElementById('viewCount');
+    const videoCount = document.getElementById('videoCount');
+    const lafecha = document.getElementById('lafecha');
+
+    obtenerFecha();
+    let getdata = () => {
+
+        fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${Userid}&key=${APIKey}`)
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data);
+
+            formato(data["items"][0].statistics.viewCount,data["items"][0].statistics.likeCount);
+            
+        })
+
+    }
+
+    function obtenerFecha(){
+        let date = new Date()
+
+        let day = date.getDate()
+        let month = date.getMonth() + 1
+        let year = date.getFullYear()
+
+        if(month < 10){
+            lafecha.innerHTML = `Fecha actual: ${day}-0${month}-${year}`;
+        }else{
+            lafecha.innerHTML = `Fecha actual: ${day}-${month}-${year}`;
+        }
+    }
+    
+    getdata();
+    setInterval('getdata()',50000);
+
+    function formato(views,likes){
+        var num = views.replace(/\./g,'');
+        var iLikes = likes.replace(/\./g,'');
+        if(!isNaN(num)){
+        num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+        num = num.split('').reverse().join('').replace(/^[\.]/,'');
+
+        iLikes = iLikes.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+        iLikes = iLikes.split('').reverse().join('').replace(/^[\.]/,'');
+        // input.value = num;
+        }
+
+        viewCount.innerHTML = num + "M";
+        likeCount.innerHTML = iLikes;
+    }
+    
+    </script>
+</body>
+</html>
+
+<!-- // Developer: MIKERM -->
